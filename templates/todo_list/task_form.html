@@ -6,8 +6,13 @@
   <h1>{{ object|yesno:"Update,Create" }} task</h1>
   <form action="" method="post" novalidate>
     {% csrf_token %}
+    {% if form.tags|length == 0 %}
+      <br>
+    <h4 class="alert alert-danger">Please create tags before adding a task.</h4>
+    {% else %}
     {{ form|crispy }}
 
     <input type="submit" value="Submit" class="btn btn-primary">
+    {% endif %}
   </form>
 {% endblock %}
